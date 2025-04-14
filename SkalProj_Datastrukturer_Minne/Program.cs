@@ -4,6 +4,8 @@ namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
+        //Frågor
+
         /// <summary>
         /// The main method, vill handle the menues for the program
         /// </summary>
