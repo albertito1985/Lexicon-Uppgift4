@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -389,7 +391,88 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+            bool validated = false;
+            string input;
+            
 
+            do
+            {
+                Console.Write("Type a string to analyze: ");
+
+                try
+                {
+                    List<int> list = new List<int>() { 1, 2, 3, 4 }; input = Console.ReadLine();
+                    if (String.IsNullOrEmpty(input))
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
+                    else
+                    {
+                        validated = true;
+                        if (analyzeString(input))
+                        {
+                            Console.WriteLine("Your string is correct");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your string is incorrect");
+                        }
+                        
+                    }
+
+                }
+                catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please enter some input!");
+                }
+            } while (!validated);
+
+            static bool analyzeString(string inputString)
+            {
+                Stack<char> parenthesysStack = new();
+                char[,] validInputs = { {'(', ')' }, {'{', '}' }, {'[', ']' } };
+                Regex regex = new(@"[({[\]})]");
+                var matches = regex.Matches(inputString);
+
+                foreach (Match match in matches) // loop though the key characters in the input string
+                {
+                    char charMatch = (char)match.Value[0];
+                    bool openMatch = false;
+                    for (int i = 0; i < validInputs.GetLength(0) -1; i++) // llop through the opening parentheses types
+                    {
+                        if (charMatch == validInputs[i, 0]) // if som character in the match is equal to an open parenthesys, put it's closing parenthesys it in the stack.
+                        {
+                            openMatch = true;
+                            parenthesysStack.Push(validInputs[i, 1]);
+                            break;
+                        }
+                    }
+                    if (!openMatch && parenthesysStack.Count >= 1) //if there is no open parenthesys and the parenthesysStack is populated
+                    {
+                        
+                        if(charMatch == parenthesysStack.Last())// if the character is the closing parenthesys that pushed last in the stack
+                        {
+                            parenthesysStack.Pop(); //then take it away from the stack
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                  
+                    }
+
+                }
+
+                if(parenthesysStack.Count == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
     }
