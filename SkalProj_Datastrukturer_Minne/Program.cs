@@ -94,17 +94,6 @@ namespace SkalProj_Datastrukturer_Minne
              * 6- När man vet exakt hur stor den ska vara och kapaciteten ska inte förändras.
              */
 
-
-            /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch statement with cases '+' and '-'
-             * '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
-             * '-': Remove the rest of the input from the list (The user could write -Adam and "Adam" would be removed from the list)
-             * In both cases, look at the count and capacity of the list
-             * As a default case, tell them to use only + or -
-             * Below you can see some inspirational code to begin working.
-            */
-
             List<string> theList = new();
             bool exit = false;
             string input=" ";
@@ -116,7 +105,7 @@ namespace SkalProj_Datastrukturer_Minne
                 Console.WriteLine("ADD or REMOVE persons from the list"
                    + "\nType \"+NAME\"  to add a new name to the list."
                    + "\nType \"-NAME\" to remove a name from the list."
-                   + "\nType \"b\" to go back to the previous men");
+                   + "\nType \"b\" to go back to the previous menu.");
 
             
                 try
@@ -143,9 +132,11 @@ namespace SkalProj_Datastrukturer_Minne
                 {
                     case '+':
                         AddToList(theList, value);
+                        ShowList(theList);
                         break;
                     case '-':
                         RemoveFromList(theList, value);
+                        ShowList(theList);
                         break;
                     case 'b':
                         exit = true;
@@ -156,28 +147,34 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                 }
             } while (!exit);
-        }
 
-        static void AddToList(List<string> theList, string stringToAdd)
-        {
-            
-            theList.Add(stringToAdd);
-            CheckCapacityAndCount(theList);
-        }
+            static void AddToList(List<string> theList, string stringToAdd)
+            {
 
-        static void RemoveFromList(List<string> theList, string stringToRemove)
-        {
-            
-            theList.Remove(stringToRemove);
-            CheckCapacityAndCount(theList);
-        }
+                theList.Add(stringToAdd);
+                CheckCapacityAndCount(theList);
+            }
 
+            static void RemoveFromList(List<string> theList, string stringToRemove)
+            {
 
+                theList.Remove(stringToRemove);
+                CheckCapacityAndCount(theList);
+            }
 
-        static void CheckCapacityAndCount(List<string> theList)
-        {
-            Console.WriteLine($"List capacity: {theList.Capacity}\n" +
-                            $"List count: {theList.Count}");
+            static void CheckCapacityAndCount(List<string> theList)
+            {
+                Console.WriteLine($"List capacity: {theList.Capacity}\n" +
+                                $"List count: {theList.Count}");
+            }
+
+            static void ShowList(List<string> theList)
+            {
+                foreach (string item in theList)
+                {
+                    Console.WriteLine(item);
+                }
+            }
         }
 
         /// <summary>
@@ -185,11 +182,74 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineQueue()
         {
-            /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch with cases to enqueue items or dequeue items
-             * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
-            */
+            Queue<string> theQueue = new();
+            bool exit = false;
+            string input = " ";
+            string value = "";
+            char nav = ' ';
+
+            do
+            {
+                Console.WriteLine("ADD or REMOVE persons from the queue"
+                   + "\nType \"+NAME\"  to add a new name to the queue."
+                   + "\nType \"-\" to remove the first person from the queue."
+                   + "\nType \"b\" to go back to the previous menu.");
+
+
+                try
+                {
+                    input = Console.ReadLine();
+                    if (String.IsNullOrEmpty(input))
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
+                    else
+                    {
+                        nav = (char)input[0];
+                        value = input.Substring(1).ToUpper();
+                    }
+
+                }
+                catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please enter some input!");
+                }
+
+                switch (nav)
+                {
+                    case '+':
+                        theQueue.Enqueue(value);
+                        ShowQueue(theQueue);
+                        break;
+                    case '-':
+                        if (theQueue.Count>0)
+                        {
+                            theQueue.Dequeue();
+                            ShowQueue(theQueue);
+                        }
+                        else
+                        {
+                            Console.WriteLine("The queue is empty.");
+                        }
+                            break;
+                    case 'b':
+                        exit = true;
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Please enter either +NAME, - or b!");
+                        break;
+                }
+            } while (!exit);
+
+            static void ShowQueue(Queue<string> theQueue)
+            {
+                foreach (string item in theQueue)
+                {
+                    Console.WriteLine(item);
+                }
+            }
         }
 
         /// <summary>
@@ -198,10 +258,128 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineStack()
         {
             /*
-             * Loop this method until the user inputs something to exit to main menue.
-             * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
+             *1- Det är inte smart att använda sig på stack i det här fallet då stack fungerar inte som en kö i det riktiga världen.
+             *alltså, personen som kommer först till kön skulle hanteras sist och det är inte rättvisst.
             */
+
+            Stack<string> theStack = new();
+            bool exit = false;
+            string input = " ";
+            string value = "";
+            char nav = ' ';
+
+            do
+            {
+                Console.WriteLine("ADD or REMOVE persons from the stack."
+                   + "\nType \"+NAME\"  to add a new name to the stack."
+                   + "\nType \"-\" to remove the first person from the stack."
+                   + "\nType \"r\" if you want to reverse the order of the letters in the name you type."
+                   + "\nType \"b\" to go back to the previous menu.");
+
+
+                try
+                {
+                    input = Console.ReadLine();
+                    if (String.IsNullOrEmpty(input))
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
+                    else
+                    {
+                        nav = (char)input[0];
+                        value = input.Substring(1).ToUpper();
+                    }
+
+                }
+                catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please enter some input!");
+                }
+
+                switch (nav)
+                {
+                    case '+':
+                        theStack.Push(value);
+                        ShowStack(theStack);
+                        break;
+                    case '-':
+                        if (theStack.Count > 0)
+                        {
+                            theStack.Pop();
+                            ShowStack(theStack);
+                        }
+                        else
+                        {
+                            Console.WriteLine("The Stack is empty.");
+                        }
+                        break;
+                    case 'b':
+                        exit = true;
+                        break;
+                    case 'r':
+                        ReverseName();
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Please enter either +NAME, - or b!");
+                        break;
+                }
+            } while (!exit);
+
+            static void ShowStack(Stack<string> theStack)
+            {
+                foreach (string item in theStack)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+
+            static void ReverseName()
+            {
+                bool validated = false;
+                string input = "";
+                Stack <char> nameStack= new();
+
+                do
+                {
+                    Console.Write("Type a name to reverse: ");
+
+                    try
+                    {
+                        input = Console.ReadLine();
+                        if (String.IsNullOrEmpty(input))
+                        {
+                            throw new IndexOutOfRangeException();
+                        }
+                        else
+                        {
+                            validated = true;
+                            foreach(char item in input)
+                            {
+                                nameStack.Push(item);
+                            }
+                            
+                        }
+
+                    }
+                    catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please enter some input!");
+                    }
+                } while (!validated);
+
+                int internalCount = nameStack.Count;
+                for (int i=0; i< internalCount; i++)
+                {
+                    Console.Write(nameStack.Pop());
+
+                }
+                Console.Write('\n');
+                
+
+            }
         }
 
         static void CheckParanthesis()
