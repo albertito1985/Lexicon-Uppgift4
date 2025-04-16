@@ -43,6 +43,8 @@ namespace Lexicon_Uppgift4
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
+                    + "\n5. Rekrusion"
+                    + "\n6. Fibonaccisekvensen"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -68,6 +70,12 @@ namespace Lexicon_Uppgift4
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        Recrusion();
+                        break;
+                    case '6':
+                        Fibonaccisekvensen();
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -80,6 +88,109 @@ namespace Lexicon_Uppgift4
                         break;
                 }
 
+            }
+        }
+
+        private static void Fibonaccisekvensen() //couldn't do it completely by myself
+        {
+            Console.Write("Write the n:th number (greater than 2) in your fibonacci sequence: ");
+            string input;
+            int result = 0;
+
+            try
+            {
+                input = Console.ReadLine();
+                bool success = int.TryParse(input, out int number);
+
+                if (success)
+                {
+                    if (number>2) {
+                        result = FibonacciGenerator(number);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Enter a number greater than 1.");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Enter a number.");
+                }
+
+            }
+            catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
+            {
+                Console.Clear();
+                Console.WriteLine("Please enter some input!");
+            }
+
+            Console.WriteLine($"result: {result}");
+        }
+
+        private static int FibonacciGenerator(int nThNumber)
+        {
+
+            if (nThNumber <= 0)
+            {
+                return 0;
+            }
+            else if (nThNumber == 1)
+            {
+                return 1;
+            }
+            else 
+            {
+                return FibonacciGenerator(nThNumber-1) + FibonacciGenerator(nThNumber - 2);
+            }
+            
+        }
+
+        private static void Recrusion()
+        {
+            Console.Write("Write the n:th even number you want to know: ");
+            string input;
+            int result=0;
+
+            try
+            {
+                input = Console.ReadLine();
+                bool success = int.TryParse(input, out int number);
+
+                if (success)
+                {
+                    result = RecrusiveEven(number);
+                }
+                else
+                {
+                    throw new ArgumentException("Enter a number.");
+                }
+
+            }
+            catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
+            {
+                Console.Clear();
+                Console.WriteLine("Please enter some input!");
+            }
+            catch (ArgumentException message)
+            {
+                Console.Clear();
+                Console.WriteLine(message);
+            }
+
+            Console.WriteLine($"result: {result}");
+
+                static int RecrusiveEven(int input)
+            {
+                if (input == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    input = input - 1;
+                }
+
+                    return RecrusiveEven(input)+2;
             }
         }
 
