@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-namespace Uppgift4
+namespace Lexicon_Uppgift4
 {
     class Program
     {
