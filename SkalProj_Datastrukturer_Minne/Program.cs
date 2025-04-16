@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-namespace SkalProj_Datastrukturer_Minne
+namespace Uppgift4
 {
     class Program
     {
@@ -260,7 +260,7 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineStack()
         {
             /*
-             *1- Det är inte smart att använda sig på stack i det här fallet då stack fungerar inte som en kö i det riktiga världen.
+             *1- Det är inte smart att använda sig av stack i det här fallet då stack fungerar inte som en kö i det riktiga världen.
              *alltså, personen som kommer först till kön skulle hanteras sist och det är inte rättvisst.
             */
 
@@ -390,6 +390,11 @@ namespace SkalProj_Datastrukturer_Minne
              * Use this method to check if the paranthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
+             */
+
+
+            /*
+             * 1- Jag använder mig av Stack             
              */
             bool validated = false;
             string input;
