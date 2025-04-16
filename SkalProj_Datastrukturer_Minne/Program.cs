@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Lexicon_Uppgift4
 {
-    class Program
+    public class LexiconProgram
     {
         //Frågor
         //1- Stacken är en del/typ av minne som lagrar data utifrån premissen last in först out och fungerar parallellt med heapen.
@@ -384,7 +384,7 @@ namespace Lexicon_Uppgift4
             }
         }
 
-        static void CheckParanthesis()
+        public static void CheckParanthesis()
         {
             /*
              * Use this method to check if the paranthesis in a string is Correct or incorrect.
@@ -433,50 +433,51 @@ namespace Lexicon_Uppgift4
                 }
             } while (!validated);
 
-            static bool analyzeString(string inputString)
+            
+        }
+        public static bool analyzeString(string inputString)
+        {
+            Stack<char> parenthesysStack = new();
+            char[,] validInputs = { { '(', ')' }, { '{', '}' }, { '[', ']' } };
+            Regex regex = new(@"[({[\]})]");
+            var matches = regex.Matches(inputString);
+
+            foreach (Match match in matches) // loop though the key characters in the input string
             {
-                Stack<char> parenthesysStack = new();
-                char[,] validInputs = { {'(', ')' }, {'{', '}' }, {'[', ']' } };
-                Regex regex = new(@"[({[\]})]");
-                var matches = regex.Matches(inputString);
-
-                foreach (Match match in matches) // loop though the key characters in the input string
+                char charMatch = (char)match.Value[0];
+                bool openMatch = false;
+                for (int i = 0; i < validInputs.GetLength(0); i++) // llop through the opening parentheses types
                 {
-                    char charMatch = (char)match.Value[0];
-                    bool openMatch = false;
-                    for (int i = 0; i < validInputs.GetLength(0) -1; i++) // llop through the opening parentheses types
+                    if (charMatch == validInputs[i, 0]) // if som character in the match is equal to an open parenthesys, put it's closing parenthesys it in the stack.
                     {
-                        if (charMatch == validInputs[i, 0]) // if som character in the match is equal to an open parenthesys, put it's closing parenthesys it in the stack.
-                        {
-                            openMatch = true;
-                            parenthesysStack.Push(validInputs[i, 1]);
-                            break;
-                        }
+                        openMatch = true;
+                        parenthesysStack.Push(validInputs[i, 1]);
+                        break;
                     }
-                    if (!openMatch && parenthesysStack.Count >= 1) //if there is no open parenthesys and the parenthesysStack is populated
+                }
+                if (!openMatch && parenthesysStack.Count >= 1) //if there is no open parenthesys and the parenthesysStack is populated
+                {
+
+                    if (charMatch == parenthesysStack.First())// if the character is the closing parenthesys that pushed last in the stack
                     {
-                        
-                        if(charMatch == parenthesysStack.Last())// if the character is the closing parenthesys that pushed last in the stack
-                        {
-                            parenthesysStack.Pop(); //then take it away from the stack
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                  
+                        parenthesysStack.Pop(); //then take it away from the stack
+                    }
+                    else
+                    {
+                        return false;
                     }
 
                 }
 
-                if(parenthesysStack.Count == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+            }
+
+            if (parenthesysStack.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

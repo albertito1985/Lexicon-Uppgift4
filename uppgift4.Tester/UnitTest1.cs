@@ -1,4 +1,4 @@
-﻿namespace uppgift4.Tester
+﻿namespace uppgift4.Tester;
 {
     public class UnitTest1
     {

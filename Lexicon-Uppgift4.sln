@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexicon-Uppgift4", "SkalProj_Datastrukturer_Minne\Lexicon-Uppgift4.csproj", "{206D12C7-16E2-4FFE-B27F-4C5616E23A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uppgift4.Tester", "uppgift4.Tester\uppgift4.Tester.csproj", "{EBFC1CAD-55EF-4873-A7D9-F20D684D1459}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uppgift4.xUni", "Uppgift4.xUni\Uppgift4.xUni.csproj", "{2FF1094B-11DE-4F99-8E92-7B57D03EC470}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{206D12C7-16E2-4FFE-B27F-4C5616E23A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{206D12C7-16E2-4FFE-B27F-4C5616E23A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{206D12C7-16E2-4FFE-B27F-4C5616E23A55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBFC1CAD-55EF-4873-A7D9-F20D684D1459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBFC1CAD-55EF-4873-A7D9-F20D684D1459}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBFC1CAD-55EF-4873-A7D9-F20D684D1459}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBFC1CAD-55EF-4873-A7D9-F20D684D1459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF1094B-11DE-4F99-8E92-7B57D03EC470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF1094B-11DE-4F99-8E92-7B57D03EC470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF1094B-11DE-4F99-8E92-7B57D03EC470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF1094B-11DE-4F99-8E92-7B57D03EC470}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
