@@ -38,7 +38,7 @@ namespace Lexicon_Uppgift4
 
             while (true)
             {
-                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                Console.WriteLine("Please navigate through the menu by inputting the number of your choice (1, 2, 3 ,4, 5, 6, 0) "
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
@@ -88,109 +88,6 @@ namespace Lexicon_Uppgift4
                         break;
                 }
 
-            }
-        }
-
-        private static void Fibonaccisekvensen() //couldn't do it completely by myself
-        {
-            Console.Write("Write the n:th number (greater than 2) in your fibonacci sequence: ");
-            string input;
-            int result = 0;
-
-            try
-            {
-                input = Console.ReadLine();
-                bool success = int.TryParse(input, out int number);
-
-                if (success)
-                {
-                    if (number>2) {
-                        result = FibonacciGenerator(number);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Enter a number greater than 1.");
-                    }
-                }
-                else
-                {
-                    throw new ArgumentException("Enter a number.");
-                }
-
-            }
-            catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
-            {
-                Console.Clear();
-                Console.WriteLine("Please enter some input!");
-            }
-
-            Console.WriteLine($"result: {result}");
-        }
-
-        private static int FibonacciGenerator(int nThNumber)
-        {
-
-            if (nThNumber <= 0)
-            {
-                return 0;
-            }
-            else if (nThNumber == 1)
-            {
-                return 1;
-            }
-            else 
-            {
-                return FibonacciGenerator(nThNumber-1) + FibonacciGenerator(nThNumber - 2);
-            }
-            
-        }
-
-        private static void Recrusion()
-        {
-            Console.Write("Write the n:th even number you want to know: ");
-            string input;
-            int result=0;
-
-            try
-            {
-                input = Console.ReadLine();
-                bool success = int.TryParse(input, out int number);
-
-                if (success)
-                {
-                    result = RecrusiveEven(number);
-                }
-                else
-                {
-                    throw new ArgumentException("Enter a number.");
-                }
-
-            }
-            catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
-            {
-                Console.Clear();
-                Console.WriteLine("Please enter some input!");
-            }
-            catch (ArgumentException message)
-            {
-                Console.Clear();
-                Console.WriteLine(message);
-            }
-
-            Console.WriteLine($"result: {result}");
-
-                static int RecrusiveEven(int input)
-            {
-                if (input == 0)
-                {
-                    return 0;
-                }
-                else
-                {
-                    input = input - 1;
-                }
-
-                    return RecrusiveEven(input)+2;
             }
         }
 
@@ -520,7 +417,7 @@ namespace Lexicon_Uppgift4
                     List<int> list = new List<int>() { 1, 2, 3, 4 }; input = Console.ReadLine();
                     if (String.IsNullOrEmpty(input))
                     {
-                        throw new IndexOutOfRangeException();
+                        Console.WriteLine("Enter a string.");
                     }
                     else
                     {
@@ -552,6 +449,8 @@ namespace Lexicon_Uppgift4
             char[,] validInputs = { { '(', ')' }, { '{', '}' }, { '[', ']' } };
             Regex regex = new(@"[({[\]})]");
             var matches = regex.Matches(inputString);
+
+            if (matches.Count == 0) return true;
 
             foreach (Match match in matches) // loop though the key characters in the input string
             {
@@ -591,7 +490,102 @@ namespace Lexicon_Uppgift4
                 return false;
             }
         }
+        private static void Recrusion()
+        {
+            
+            string input;
+            int result = 0;
+            bool validated = false;
 
+            do
+            {
+                Console.Write("Write the n:th even number you want to know: ");
+                input = Console.ReadLine();
+                bool success = int.TryParse(input, out int number);
+
+                if (success)
+                {
+                    validated = true;
+                    result = RecrusiveEven(number);
+                    Console.WriteLine($"result: {result}");
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a number!");
+                }
+            } while (!validated);
+            
+            static int RecrusiveEven(int input)
+            {
+                if (input == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    input = input - 1;
+                }
+
+                return RecrusiveEven(input) + 2;
+            }
+        }
+
+        private static void Fibonaccisekvensen() //couldn't do it completely by myself
+        {
+            
+            string input;
+            int result = 0;
+
+            bool validated = false;
+
+            do {
+                Console.Write("Write the n:th number (greater than 2) in your fibonacci sequence: ");
+                input = Console.ReadLine();
+                bool success = int.TryParse(input, out int number);
+
+                if (success)
+                {
+                    if (number > 2)
+                    {
+                        validated = true;
+                        result = FibonacciGenerator(number);
+                        Console.WriteLine($"result: {result}");
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Enter a number greater than 1.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a number!");
+                }
+            } while (!validated);
+
+                
+
+            
+        }
+
+        private static int FibonacciGenerator(int nThNumber)
+        {
+
+            if (nThNumber <= 0)
+            {
+                return 0;
+            }
+            else if (nThNumber == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return FibonacciGenerator(nThNumber - 1) + FibonacciGenerator(nThNumber - 2);
+            }
+
+        }
+
+        
     }
 }
 
